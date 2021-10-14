@@ -1,7 +1,25 @@
 api_platform:
+    title: 'Stock Portfolio API'
+    description: 'The wonderful API of our stock portfolio application'
+    version: '1.0.0'
+    enable_docs: true
+    enable_swagger: true
+    enable_swagger_ui: true
+    defaults:
+        pagination_enabled: true
+        pagination_client_items_per_page: true
+        pagination_items_per_page: 100
+        pagination_maximum_items_per_page: 250
+    collection:
+        pagination:
+            items_per_page_parameter_name: pageSize
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:
+        api_keys:
+            apiKey:
+                name: Authorization
+                type: header
         versions: [3]
