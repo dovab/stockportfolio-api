@@ -1,0 +1,9 @@
+{% extends "emails/base.text.twig" %}
+
+{% block content %}
+Hi {{ firstName }},
+Thanks for signing up for an account for the Stock Portfolio app. To activate your account please copy and paste the following link in your browser:
+{{ activationLink }}
+
+After activating your account you can use the service.
+{% endblock %}
