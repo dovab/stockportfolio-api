@@ -3,6 +3,7 @@
 namespace App\Application\Service;
 
 use App\Entity\User;
+use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -13,15 +14,9 @@ use Symfony\Component\Mime\Address;
  */
 class EmailService
 {
-    /**
-     * @param LogService $logService
-     * @param MailerInterface $mailer
-     * @param SettingService $settingService
-     */
     public function __construct(
-        private LogService $logService,
         private MailerInterface $mailer,
-        private SettingService $settingService
+        private LoggerInterface $logger
     ) {}
 
     /**
@@ -44,7 +39,7 @@ class EmailService
         try {
             $this->mailer->send($email);
         } catch (TransportExceptionInterface $e) {
-            $this->logService->warning(
+            $this->logger->warning(
                 sprintf('Cannot send email message: %s', $e->getMessage()),
                 [
                     'exception' => $e,
@@ -67,7 +62,7 @@ class EmailService
     {
         $this->send(
             $template,
-            ['address' => $user->getEmail(), 'name' => $user->getName()],
+            ['address' => $user->getEmail(), 'name' => sprintf('%s %s', $user->getFirstName(), $user->getLastName())],
             $subject,
             $templateVariables
         );
