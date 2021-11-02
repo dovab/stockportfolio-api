@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
         'register' => [
             'method' => 'POST',
             'status' => 204,
-            'path' => '/users/register',
+            'path' => '/public/users/register',
             'controller' => Register::class,
             'defaults' => [
                 'dto' => RegisterUserRequest::class,
