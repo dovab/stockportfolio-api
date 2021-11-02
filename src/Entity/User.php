@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'register' => [
             'method' => 'POST',
             'status' => 204,
-            'path' => '/users/register',
+            'path' => '/public/users/register',
             'controller' => Register::class,
             'defaults' => [
                 'dto' => RegisterUserRequest::class,

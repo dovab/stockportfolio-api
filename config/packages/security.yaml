@@ -37,5 +37,6 @@ security:
     # Define some access control rules
     access_control:
       - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/api/public, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/api/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/api, roles: ROLE_USER }
