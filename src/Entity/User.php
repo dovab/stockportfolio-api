@@ -73,7 +73,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
         'activate' => [
             'method' => 'POST',
             'status' => 204,
-            'path' => '/users/activate',
+            'path' => '/public/users/activate',
             'controller' => ActivateAccount::class,
             'defaults' => [
                 'dto' => ActivateAccountRequest::class,
