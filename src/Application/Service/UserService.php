@@ -4,6 +4,7 @@ namespace App\Application\Service;
 
 use App\Entity\User;
 use App\Constant\JwtActions;
+use App\Exception\NotFoundException;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Dto\Request\User\RegisterUserRequest;
@@ -18,7 +19,8 @@ class UserService
         private EmailService $emailService,
         private JWTTokenManagerInterface $tokenManager,
         private UserRepository $userRepository,
-        private UserPasswordHasherInterface $userPasswordHasher
+        private UserPasswordHasherInterface $userPasswordHasher,
+        private string $frontendUrl
     ){}
 
     /**
@@ -51,7 +53,7 @@ class UserService
 
         $token = $this->tokenManager->createFromPayload($user, ['sub' => $user->getId(), 'action' => JwtActions::ACTIVATE_ACCOUNT]);
         $this->emailService->sendToUser('account/welcome', $user, 'Confirm your account', [
-            'activationLink' => sprintf('https://stockportfolio.woutercarabain.com/activate-account?token=%s', $token), // TODO: Make this a parameter
+            'activationLink' => sprintf('%sactivate-account?token=%s', $this->frontendUrl, $token),
             'user' => $user,
         ]);
 
@@ -70,7 +72,7 @@ class UserService
         $decodedToken = $this->tokenManager->parse($request->token);
         $user = $this->userRepository->find($decodedToken['sub']);
         if (null === $user) {
-            throw new \Exception(sprintf('The user %s was not found', $decodedToken['sub']));
+            throw NotFoundException::createEntityNotFoundException('User');
         }
 
         $user->setActive(true);
