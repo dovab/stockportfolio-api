@@ -95,11 +95,11 @@ class StockPrice
     }
 
     /**
-     * @param int $price
+     * @param float $price
      *
      * @return StockPrice
      */
-    public function setPrice(int $price): StockPrice
+    public function setPrice(float $price): StockPrice
     {
         $this->price = round($price * self::PRICE_MULTIPLIER);
 

@@ -102,9 +102,9 @@ class Portfolio implements HasUserInterface
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getAmount(): int
+    public function getAmount(): float
     {
         return $this->amount / self::PRICE_MULTIPLIER;
     }
@@ -150,11 +150,11 @@ class Portfolio implements HasUserInterface
     }
 
     /**
-     * @param int $purchasePrice
+     * @param float $purchasePrice
      *
      * @return Portfolio
      */
-    public function setPurchasePrice(int $purchasePrice): Portfolio
+    public function setPurchasePrice(float $purchasePrice): Portfolio
     {
         $this->purchasePrice = round($purchasePrice * self::PRICE_MULTIPLIER);
 
