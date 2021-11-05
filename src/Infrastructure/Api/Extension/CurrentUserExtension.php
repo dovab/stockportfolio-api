@@ -50,7 +50,7 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
      */
     private function addWhere(QueryBuilder $queryBuilder, string $resourceClass): void
     {
-        if (is_subclass_of($resourceClass, HasUserInterface::class)
+        if (false === is_subclass_of($resourceClass, HasUserInterface::class)
             || $this->security->isGranted(User::ROLE_ADMIN)
             || null === $user = $this->security->getUser()
         ) {
