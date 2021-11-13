@@ -2,17 +2,19 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Controller\User\Register;
-use App\Dto\Request\User\RegisterUserRequest;
-use App\Infrastructure\Doctrine\Trait\SoftDeletableTrait;
-use App\Infrastructure\Doctrine\Trait\TimestampableTrait;
-use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use App\Controller\User\Register;
+use App\Repository\UserRepository;
+use App\Controller\User\ActivateAccount;
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Dto\Request\User\RegisterUserRequest;
+use App\Dto\Request\User\ActivateAccountRequest;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Security\Core\User\UserInterface;
+use App\Infrastructure\Doctrine\Trait\SoftDeletableTrait;
+use App\Infrastructure\Doctrine\Trait\TimestampableTrait;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ApiResource(
     collectionOperations: [
@@ -67,6 +69,41 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'deserialize' => false,
             'validate' => false,
             'write' => false,
+        ],
+        'activate' => [
+            'method' => 'POST',
+            'status' => 204,
+            'path' => '/public/users/activate',
+            'controller' => ActivateAccount::class,
+            'defaults' => [
+                'dto' => ActivateAccountRequest::class,
+            ],
+            'openapi_context' => [
+                'summary' => 'Activates a user account',
+                'description' => 'Activates a user account',
+                'requestBody' => [
+                    'content' => [
+                        'application/json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'token' => [
+                                        'type' => 'string',
+                                        'example' => 'TOKENSTRING',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ]
+                ],
+                'responses' => [
+                    204 => [
+                        'description' => 'The user is activated',
+                    ]
+                ]
+            ],
+            'read' => false,
+            'deserialize' => false,
         ],
     ],
     itemOperations: [
