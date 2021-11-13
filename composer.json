@@ -4,7 +4,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/core": "^2.6",
@@ -16,6 +16,7 @@
         "lexik/jwt-authentication-bundle": "^2.13",
         "nelmio/cors-bundle": "^2.1",
         "phpdocumentor/reflection-docblock": "^5.2",
+        "scheb/yahoo-finance-api": "^4.2",
         "stof/doctrine-extensions-bundle": "^1.6",
         "symfony/asset": "5.3.*",
         "symfony/console": "5.3.*",
