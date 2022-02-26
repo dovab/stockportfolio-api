@@ -10,6 +10,7 @@
         "api-platform/core": "^2.6",
         "composer/package-versions-deprecated": "1.11.99.4",
         "doctrine/annotations": "^1.0",
+        "doctrine/dbal": "^2",
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.10",
@@ -43,7 +44,13 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "symfony/flex": true,
+            "symfony/runtime": true,
+            "pestphp/pest-plugin": true
+        }
     },
     "autoload": {
         "psr-4": {
@@ -83,6 +90,8 @@
         }
     },
     "require-dev": {
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-mock": "^1.0",
         "symfony/debug-bundle": "5.3.*",
         "symfony/stopwatch": "5.3.*",
         "symfony/web-profiler-bundle": "5.3.*"
